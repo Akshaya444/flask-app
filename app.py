@@ -5,6 +5,9 @@ import pandas as pd
 import json
 import uuid
 from cryptography.fernet import Fernet
+import os
+PORT = int(os.environ.get('PORT', 10000))
+
 
 # Generate and load encryption key
 if not os.path.exists("secret.key"):
@@ -277,5 +280,5 @@ def create_interface():
     return iface
 
 if __name__ == "__main__":
-    iface = create_interface()
-    iface.launch()
+    interface = create_interface()
+    interface.launch(server_name="0.0.0.0", server_port=PORT)
